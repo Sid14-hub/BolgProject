@@ -7,15 +7,19 @@ use App\Http\Controllers\WelcomController;
 
 // To welcome page
 Route::get('/', [WelcomController::class, 'index'])->name('welcom.index');
+
 //to blog page
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
-//to single
+
+//to single blog page
 Route::get('/blog/post', [BlogController::class, 'show'])->name('blog.show');
+
 //to about
 Route::get('/about', function () {
     return view('about');
 })->name('about');
-//tocontact
+
+//to contact
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::get('/dashboard', function () {
     return view('dashboard');
