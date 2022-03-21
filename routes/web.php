@@ -14,6 +14,12 @@ Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 //to single blog page
 Route::get('/blog/post', [BlogController::class, 'show'])->name('blog.show');
 
+//to create blog post
+Route::get('/blog/create', [BlogController::class, 'create'])->name('blog.create');
+
+//to store blog post to the database
+Route::post('/blog', [BlogController::class, 'store'])->name('blog.store');
+
 //to about
 Route::get('/about', function () {
     return view('about');

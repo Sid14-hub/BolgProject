@@ -14,7 +14,7 @@
                     You're logged in!
                     <div class="dashboard">
                         <ul>
-                        <li><a href="">Create Post</a></li>
+                        <li><a href="{{route('blog.create')}}">Create Post</a></li>
                         <li><a href="">Create Category</a></li>
                         <li><a href="">Categories List</a></li>
                         </ul>
