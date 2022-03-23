@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use App\Models\Post;
 
 class BlogController extends Controller
 {
@@ -34,6 +34,15 @@ class BlogController extends Controller
        $user_id  = Auth::user()->id;
        $body = $req->input('body');
        $imagePath = 'storage/'.$req->file('image')->store('postsImages','public');
-       dd('passed');
+
+       $post = new Post();
+       $post->title = $title;
+       $post->slug = $slug;
+       $post->user_id = $user_id;
+       $post->body = $body;
+       $post->imagePath = $imagePath;
+
+       $post->save();
+       return redirect()->back();
     }
 }
