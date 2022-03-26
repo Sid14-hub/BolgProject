@@ -6,6 +6,9 @@
     <main class="container" style="background-color: #fff;">
         <section id="contact-us">
             <h1 style="padding-top: 50px;">Create New Post!</h1>
+            @if(session('status'))
+                <p style="margin-bottom:20px;padding-top:20px;color:#fff;width:100%;height:50px;text-align:center;background:#5cb85c;">{{session('status')}}</p>
+            @endif    
             <!-- Contact Form -->
             <div class="contact-form">
                 <form action="{{route('blog.store')}}" method="post" enctype="multipart/form-data">

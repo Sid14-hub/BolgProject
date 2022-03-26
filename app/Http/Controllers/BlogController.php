@@ -11,11 +11,12 @@ class BlogController extends Controller
 {
     public function index()
     {
-        return view('blogPosts.blog');
+        $posts = Post::all();
+        return view('blogPosts.blog', compact('posts'));
     }
-    public function show()
-    {
-        return view('blogPosts.single-blog-post');
+    public function show($slug)
+    {   $post = Post::where('slug',$slug)->first();
+        return view('blogPosts.single-blog-post',compact('post'));
     }
     public function create()
     {
@@ -43,6 +44,6 @@ class BlogController extends Controller
        $post->imagePath = $imagePath;
 
        $post->save();
-       return redirect()->back();
+       return redirect()->back()->with('status','Post Created Successfully');
     }
 }

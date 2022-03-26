@@ -12,7 +12,7 @@ Route::get('/', [WelcomController::class, 'index'])->name('welcom.index');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 
 //to single blog page
-Route::get('/blog/post', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/blog/{post:slug}', [BlogController::class, 'show'])->name('blog.show');
 
 //to create blog post
 Route::get('/blog/create', [BlogController::class, 'create'])->name('blog.create');
