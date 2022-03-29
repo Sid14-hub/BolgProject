@@ -9,6 +9,10 @@ use App\Models\Post;
 
 class BlogController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
     public function index()
     {
         $posts = Post::latest()->get();
@@ -37,7 +41,8 @@ class BlogController extends Controller
        ]);
 
        $title = $req->input('title');
-       $slug =  Str::slug($title,'-');
+       $postId = Post::latest()->take(1)->first()->id+1;
+       $slug =  Str::slug($title,'-') . '-' . $postId;
        $user_id  = Auth::user()->id;
        $body = $req->input('body');
        $imagePath = 'storage/'.$req->file('image')->store('postsImages','public');
