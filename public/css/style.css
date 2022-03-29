@@ -518,3 +518,23 @@ textarea {
   display: inline-block;
   margin: 2px 0;
 }
+
+.post-buttons{
+  display: flex;
+  justify-content: space-between;
+}
+.post-buttons a{
+  background-color: #4caf50;
+  color: #ddd;
+  font-size: large;
+  height: max-content;
+  padding: 5px;
+}
+.post-buttons input{
+  background-color: red;
+  padding: 5px;
+  font-size: large;
+  border: none;
+  color: #ddd;
+  cursor: pointer;
+}
