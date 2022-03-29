@@ -14,10 +14,16 @@ class BlogController extends Controller
         $posts = Post::latest()->get();
         return view('blogPosts.blog', compact('posts'));
     }
-    public function show($slug)
-    {   $post = Post::where('slug',$slug)->first();
+    /**public function show($slug)
+      {   $post = Post::where('slug',$slug)->first();
+        return view('blogPosts.single-blog-post',compact('post'));
+    }**/
+
+    //Using route model binding
+    public function show(Post $post){
         return view('blogPosts.single-blog-post',compact('post'));
     }
+
     public function create()
     {
         return view('blogPosts.create');
