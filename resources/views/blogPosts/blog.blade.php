@@ -36,8 +36,10 @@
         </div>
         @endforeach
 
-        <!-- pagination -->
-        <div class="pagination" id="pagination">
+        
+      </section>
+      <!-- pagination -->
+      <div class="pagination" id="pagination">
           <a href="">&laquo;</a>
           <a class="active" href="">1</a>
           <a href="">2</a>
@@ -46,8 +48,7 @@
           <a href="">5</a>
           <a href="">&raquo;</a>
         </div>
-      </section>
-
+        <br>
       <!-- Main footer -->
       <footer class="main-footer">
         <div>
