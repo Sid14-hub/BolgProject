@@ -24,6 +24,9 @@ class BlogController extends Controller
     }**/
 
     public function edit(Post $post){
+        if(auth()->user()->id !== $post->user->id){
+            abort(403);
+        }
         return view('blogPosts.edit-blog-post',compact('post'));
     }
     //Using route model binding
@@ -37,6 +40,10 @@ class BlogController extends Controller
     }
     public function store(Request $req)
     {
+        if(auth()->user()->id !== $post->user->id){
+            abort(403);
+        }
+        
        $req->validate([
            'title' => 'required',
            'image' => 'required | image',
