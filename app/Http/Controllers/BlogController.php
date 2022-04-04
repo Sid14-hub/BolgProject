@@ -23,6 +23,9 @@ class BlogController extends Controller
         return view('blogPosts.single-blog-post',compact('post'));
     }**/
 
+    public function edit(Post $post){
+        return view('blogPosts.edit-blog-post',compact('post'));
+    }
     //Using route model binding
     public function show(Post $post){
         return view('blogPosts.single-blog-post',compact('post'));
@@ -56,5 +59,28 @@ class BlogController extends Controller
 
        $post->save();
        return redirect()->back()->with('status','Post Created Successfully');
+    }
+
+    public function update(Request $req, Post $post){
+        $req->validate([
+            'title' => 'required',
+            'image' => 'required | image',
+            'body' => 'required'
+        ]);
+ 
+        $title = $req->input('title');
+        $postId = $post->id;
+        $slug =  Str::slug($title,'-') . '-' . $postId;
+        $body = $req->input('body');
+        $imagePath = 'storage/'.$req->file('image')->store('postsImages','public');
+ 
+        
+        $post->title = $title;
+        $post->slug = $slug;
+        $post->body = $body;
+        $post->imagePath = $imagePath;
+ 
+        $post->save();
+        return redirect()->back()->with('status','Post Edited Successfully');
     }
 }
