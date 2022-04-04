@@ -32,7 +32,7 @@
           @if(auth()->user()->id === $post->user->id)
               <div class="post-buttons">
                 <a href="{{route('blog.edit', $post)}}">Edit</a>
-                <form action="{{route('blog.delete', $post)}}" method="post">
+                <form action="{{route('blog.destroy', $post)}}" method="post">
                   @csrf
                   @method('delete')
                   <input type="submit" value="Delete">

@@ -39,7 +39,7 @@ class BlogController extends Controller
         return view('blogPosts.single-blog-post',compact('post'));
     }
     
-    public function delete(Post $post){
+    public function destroy(Post $post){
         $post->delete();
         return redirect()->back()->with('status','Post Deleted Successfully');
     }
@@ -50,10 +50,6 @@ class BlogController extends Controller
     }
     public function store(Request $req)
     {
-        if(auth()->user()->id !== $post->user->id){
-            abort(403);
-        }
-
        $req->validate([
            'title' => 'required',
            'image' => 'required | image',
