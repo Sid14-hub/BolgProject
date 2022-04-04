@@ -4,6 +4,9 @@
 <!-- main -->
 <main class="container">
       <h2 class="header-title">All Blog Posts</h2>
+      @if(session('status'))
+                <p style="margin-bottom:20px;padding-top:20px;color:#fff;width:100%;height:50px;text-align:center;background:#5cb85c;">{{session('status')}}</p>
+      @endif 
       <div class="searchbar">
         <form action="">
           <input type="text" placeholder="Search..." name="search" />
@@ -23,13 +26,15 @@
         </ul>
       </div>
       <section class="cards-blog latest-blog">        
-        @foreach($posts as $post)
+        @forelse($posts as $post)
         <div class="card-blog-content">
           @auth
           @if(auth()->user()->id === $post->user->id)
               <div class="post-buttons">
                 <a href="{{route('blog.edit', $post)}}">Edit</a>
-                <form action="" method="">
+                <form action="{{route('blog.delete', $post)}}" method="post">
+                  @csrf
+                  @method('delete')
                   <input type="submit" value="Delete">
                 </form>
               </div>
@@ -44,7 +49,9 @@
             <a href="{{route('blog.show',$post)}}">{{$post->title}}</a>
           </h4>
         </div>
-        @endforeach
+        @empty
+        <p>Sorry, Not Found</p>
+        @endforelse
 
         
       </section>

@@ -11,11 +11,16 @@ class BlogController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('index');
+        $this->middleware('auth')->except('index','show');
     }
-    public function index()
+    public function index(Request $req)
     {
-        $posts = Post::latest()->get();
+        if($req->search){
+            $posts = Post::where('title','like','%'.$req->search.'%')
+            ->orwhere('title','like','%'.$req->search.'%')->latest()->get();
+        }else{
+            $posts = Post::latest()->get();
+        }
         return view('blogPosts.blog', compact('posts'));
     }
     /**public function show($slug)
@@ -33,6 +38,11 @@ class BlogController extends Controller
     public function show(Post $post){
         return view('blogPosts.single-blog-post',compact('post'));
     }
+    
+    public function delete(Post $post){
+        $post->delete();
+        return redirect()->back()->with('status','Post Deleted Successfully');
+    }
 
     public function create()
     {
@@ -43,7 +53,7 @@ class BlogController extends Controller
         if(auth()->user()->id !== $post->user->id){
             abort(403);
         }
-        
+
        $req->validate([
            'title' => 'required',
            'image' => 'required | image',
