@@ -13,6 +13,8 @@ class BlogController extends Controller
     {
         $this->middleware('auth')->except('index','show');
     }
+
+
     public function index(Request $req)
     {
         if($req->search){
@@ -23,10 +25,7 @@ class BlogController extends Controller
         }
         return view('blogPosts.blog', compact('posts'));
     }
-    /**public function show($slug)
-      {   $post = Post::where('slug',$slug)->first();
-        return view('blogPosts.single-blog-post',compact('post'));
-    }**/
+
 
     public function edit(Post $post){
         if(auth()->user()->id !== $post->user->id){
@@ -34,6 +33,8 @@ class BlogController extends Controller
         }
         return view('blogPosts.edit-blog-post',compact('post'));
     }
+
+
     //Using route model binding
     public function show(Post $post){
         return view('blogPosts.single-blog-post',compact('post'));
@@ -48,6 +49,9 @@ class BlogController extends Controller
     {
         return view('blogPosts.create');
     }
+
+
+
     public function store(Request $req)
     {
        $req->validate([
@@ -73,6 +77,8 @@ class BlogController extends Controller
        $post->save();
        return redirect()->back()->with('status','Post Created Successfully');
     }
+
+
 
     public function update(Request $req, Post $post){
         $req->validate([
